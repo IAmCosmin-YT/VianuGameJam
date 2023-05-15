@@ -12,9 +12,11 @@ public class Zana : MonoBehaviour
     [SerializeField] Vector2[] waypoints;
 
     int nr = 0;
+    int n = 0;
     float smoothness = .01f;
 
     bool active = false;
+    bool activeGoToWp = false;
     bool stopAllPlayerInput = false;
 
 
@@ -27,6 +29,9 @@ public class Zana : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GoToWaypoints();
+
+        gameObject.transform.position = zana;
         if (Input.GetKeyDown(KeyCode.Mouse1) && !active && !stopAllPlayerInput)
         {
             active = true;
@@ -35,18 +40,10 @@ public class Zana : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Mouse1) && active)
         {
             active = false;
-            for(int i = 1; i<nr; i++)
-            {
-                pos.x = Mathf.Lerp(waypoints[i - 1].x, waypoints[i].x, smoothness);
-                pos.y = Mathf.Lerp(waypoints[i - 1].y, waypoints[i].y, smoothness);
-                gameObject.transform.position = pos;
-            }
-            for(int i = 0; i < nr; i++)
-            {
-                waypoints[i] = Vector2.zero;
-            }
-            nr = 0;
-            stopAllPlayerInput = false;
+            activeGoToWp = true;
+        }else if (nr == 5)
+        {
+            activeGoToWp = true;
         }
 
         if (active)
@@ -58,10 +55,12 @@ public class Zana : MonoBehaviour
             mousePos = Input.mousePosition;
             worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         }
-        pos.x = Mathf.Lerp(gameObject.transform.position.x, worldPos.x, smoothness);
-        pos.y = Mathf.Lerp(gameObject.transform.position.y, worldPos.y, smoothness);
-        gameObject.transform.position = pos;
-
+        if (!stopAllPlayerInput)
+        {
+            pos.x = Mathf.Lerp(zana.x, worldPos.x, smoothness);
+            pos.y = Mathf.Lerp(zana.y, worldPos.y, smoothness);
+            zana = pos;
+        }
     }
 
     void RememberFuturePos()
@@ -72,6 +71,23 @@ public class Zana : MonoBehaviour
             worldPos = Camera.main.ScreenToWorldPoint(mousePos);
             waypoints[nr] = worldPos;
             nr++;
+        }
+        if (nr == 5)
+        {
+            active = false;
+        }
+    }
+
+    void GoToWaypoints()
+    {
+        if (activeGoToWp)
+        {
+            if (zana != waypoints[n])
+            {
+                pos.x = Mathf.Lerp(zana.x, waypoints[n].x, smoothness);
+                pos.y = Mathf.Lerp(zana.y, waypoints[n].y, smoothness);
+                zana = pos;
+            }
         }
     }
 }

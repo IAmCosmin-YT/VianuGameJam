@@ -306,7 +306,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4130837c3721ca44285dc91cbb08e16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints: []
+  waypoints:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
 --- !u!60 &666014563
 PolygonCollider2D:
   m_ObjectHideFlags: 0
