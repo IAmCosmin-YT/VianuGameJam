@@ -37,12 +37,9 @@ public class Zana : MonoBehaviour
             active = false;
             for(int i = 1; i<nr; i++)
             {
-                while(zana != pos)
-                {
-                    pos.x = Mathf.Lerp(waypoints[i - 1].x, waypoints[i].x, smoothness);
-                    pos.y = Mathf.Lerp(waypoints[i - 1].y, waypoints[i].y, smoothness);
-                    gameObject.transform.position = pos;
-                }
+                pos.x = Mathf.Lerp(waypoints[i - 1].x, waypoints[i].x, smoothness);
+                pos.y = Mathf.Lerp(waypoints[i - 1].y, waypoints[i].y, smoothness);
+                gameObject.transform.position = pos;
             }
             for(int i = 0; i < nr; i++)
             {
