@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,16 +8,24 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 mousePos;
     private int targetIndex = 0, posIndex = 0;
     private bool canMove;
-    [SerializeField] Vector2[] posQueue = null;
+    public Vector2[] posQueue = null;
     [SerializeField] float speed = 0.1f;
+    [SerializeField] ParticleSystem particle;
+    public Text text;
+
+    private void Start() {
+        text.text = null;
+    }
     void Update()
     {   
         if(Input.GetKeyDown(KeyCode.Mouse0)){
-            canMove = true;
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if(posIndex != posQueue.Length){
+                canMove = true;
                 posQueue[posIndex++] = mousePos;
+                text.text = "Move Queue: x" + posIndex.ToString();
             }
+            Instantiate(particle, mousePos,Quaternion.identity);
         }
         if(Input.GetKeyDown(KeyCode.Mouse1)){
             canMove = false;    
@@ -41,5 +50,6 @@ public class PlayerMovement : MonoBehaviour
         targetIndex = 0;
         posIndex = 0;
         for(int i = 0; i<posQueue.Length; i++) posQueue[i] = Vector2.zero;
+        text.text = null;
     }
 }
