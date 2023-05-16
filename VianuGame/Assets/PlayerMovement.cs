@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private int targetIndex = 0, posIndex = 0;
     private bool canMove, singleClick;
     public Vector2[] posQueue = null;
-    [SerializeField] float speed = 0.1f;
+    [SerializeField] float speed = 5f;
     [SerializeField] ParticleSystem particle;
     public Text text;
 
