@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     public Image image;
-    [SerializeField] private int nr = 0;
-    public int maxWords = 20;
+    [SerializeField] public int nr = 0;
+    public int maxWords;
     [SerializeField] private float imageSizeAdder;
 
     private void Start() {
+        maxWords = PlayerPrefs.GetInt("maxWords");
         imageSizeAdder = image.fillAmount / maxWords * 1.0f;
         image.fillAmount = 0;
     }
