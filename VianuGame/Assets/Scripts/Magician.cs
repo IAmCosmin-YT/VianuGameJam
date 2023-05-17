@@ -34,7 +34,10 @@ public class Magician : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if (health == 0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (health == 0){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Time.timeScale = 0;
+        }
     }
     /*
     private IEnumerator disableShake()
