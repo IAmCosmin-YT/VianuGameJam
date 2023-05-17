@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     public Image image;
-    [SerializeField] int nr = 0;
+    [SerializeField] private int nr = 0;
     [SerializeField] private int maxWords = 20;
     [SerializeField] private float imageSizeAdder;
 

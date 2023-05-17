@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] public float speed = 1;
-    [SerializeField] public float speedCopy;
-    [SerializeField] public float health = 1;
-    [SerializeField] private soundManager soundManager;
+    public float speed = 1;
+    public float speedCopy;
+    public float health = 1;
+    private soundManager soundManager;
 
     private void Start()
     {
