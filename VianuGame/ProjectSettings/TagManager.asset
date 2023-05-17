@@ -43,3 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Enemy,Mage
+    uniqueID: 1413919119
+    locked: 0
+  - name: Zana
+    uniqueID: 1138479315
+    locked: 0
+  - name: UI
+    uniqueID: 2513642049
+    locked: 0
