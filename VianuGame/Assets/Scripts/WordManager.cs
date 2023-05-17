@@ -7,13 +7,15 @@ public class WordManager : MonoBehaviour
 {
     public List<Word> words;
     private Word activeWord;
-    public Text text;
+    public Text text, progress;
     public Score score;
     //public WordSpawner wordSpawner;
-    private bool hasActiveWord; 
+    private bool hasActiveWord;
+    private int increment = 0;
 
     private void Start() {
         AddWord();
+        progress.text = increment + "/" + score.maxWords;
     }
     public void AddWord(){
         Word word = new Word(WordGenerator.GetRandomWord(), text);
@@ -28,6 +30,7 @@ public class WordManager : MonoBehaviour
             if(activeWord.WordTyped()){
                 AddWord();
                 score.Increment();
+                progress.text = ++increment + "/" + score.maxWords;
             }
         }
         else{

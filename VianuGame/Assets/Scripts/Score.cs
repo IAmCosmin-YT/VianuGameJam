@@ -7,7 +7,7 @@ public class Score : MonoBehaviour
 {
     public Image image;
     [SerializeField] private int nr = 0;
-    [SerializeField] private int maxWords = 20;
+    public int maxWords = 20;
     [SerializeField] private float imageSizeAdder;
 
     private void Start() {
