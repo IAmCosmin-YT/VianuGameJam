@@ -43,3 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Enemy,Mage
+    uniqueID: 3776253241
+    locked: 0
+  - name: Godot
+    uniqueID: 426402883
+    locked: 0
+  - name: UI
+    uniqueID: 755962565
+    locked: 0
