@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Magician : MonoBehaviour
 {
     [SerializeField] private int health = 5;
+    [SerializeField] private Animator cameraShake;
     [SerializeField] private int x;
     [SerializeField] private Image healthbar;
 
@@ -27,10 +28,20 @@ public class Magician : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            StartCoroutine(disableShake());
             health--;
             Destroy(other.gameObject);
         }
 
         if (health == 0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    private IEnumerator disableShake()
+    {
+        if (!cameraShake.GetBool("cameraShake"))
+        {
+            cameraShake.SetBool("cameraShake", true);
+            yield return new WaitForSeconds(.3f);
+            cameraShake.SetBool("cameraShake", false);
+        }
     }
 }
