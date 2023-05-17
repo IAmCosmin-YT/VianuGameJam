@@ -7,19 +7,30 @@ public class PlayerMovement : MonoBehaviour
 {
     private Vector2 mousePos;
     private int targetIndex = 0, posIndex = 0;
-    private bool canMove, singleClick;
+    private bool canMove, singleClick, facingRight;
     public Vector2[] posQueue = null;
     [SerializeField] float speed = 5f;
     [SerializeField] ParticleSystem particle;
     public Text text;
+    private Animator anim;
 
     private void Start() {
         text.text = null;
+        anim = GetComponent<Animator>();
+        anim.Play("Zana");
     }
     void Update()
     {   
         if(Input.GetKeyDown(KeyCode.Mouse0)){
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if(mousePos.x < transform.position.x && facingRight == true){
+                FlipCharacter();
+                facingRight = false;
+            }
+            else if(mousePos.x > transform.position.x && facingRight == false){
+                FlipCharacter();
+                facingRight = true;
+            }
             if(Input.GetKey(KeyCode.LeftShift) == false){
                 singleClick = true;
             }
@@ -61,5 +72,11 @@ public class PlayerMovement : MonoBehaviour
         posIndex = 0;
         for(int i = 0; i<posQueue.Length; i++) posQueue[i] = Vector2.zero;
         text.text = null;
+    }
+
+    void FlipCharacter(){
+        Vector2 flipScale = transform.localScale;
+        flipScale.x *= -1;
+        transform.localScale = flipScale;
     }
 }

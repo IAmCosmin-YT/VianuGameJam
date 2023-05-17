@@ -65,7 +65,6 @@ sirenova
 solemnis
 starglade
 tenebris
-twilighta
 umbrahex
 vapormyst
 veridian
