@@ -4,13 +4,15 @@ using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float speed = 4;
+    [SerializeField] public float speed = 1;
+    [SerializeField] public float speedCopy;
     [SerializeField] public float health = 1;
     [SerializeField] private soundManager soundManager;
 
     private void Start()
     {
         soundManager = GameObject.Find("SoundManager").GetComponent<soundManager>();
+        speedCopy = speed;
     }
 
     private void Update()
@@ -27,5 +29,12 @@ public class Enemy : MonoBehaviour
     public void TakeDamage()
     {
         health -= Time.deltaTime * 2;
+    }
+    public void SlowDown()
+    {
+        if(speed >= speedCopy/2)
+        {
+            speed -= Time.deltaTime*3;
+        }
     }
 }

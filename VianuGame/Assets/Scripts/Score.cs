@@ -5,13 +5,23 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    public Slider slider;
+    public Image image;
+    [SerializeField] int nr = 0;
     [SerializeField] private int maxWords = 20;
+    [SerializeField] private float imageSizeAdder;
 
     private void Start() {
-        slider.maxValue = maxWords;
+        imageSizeAdder = image.fillAmount / maxWords * 1.0f;
+        image.fillAmount = 0;
     }
     public void Increment(){
-        slider.value += 1;
+        nr++;
+    }
+    private void Update()
+    {
+        if(image.fillAmount < imageSizeAdder * nr)
+        {
+            image.fillAmount += Time.deltaTime * 1.5f;
+        }
     }
 }

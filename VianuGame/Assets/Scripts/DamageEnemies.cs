@@ -25,6 +25,10 @@ public class DamageEnemies : MonoBehaviour
             if (enemy != null && enemies.Contains(enemy))
             {
                 enemies.Remove(enemy);
+                while (enemy.speed <= enemy.speedCopy)
+                {
+                    enemy.speed += Time.deltaTime*1.5f;
+                }
             }
         }
     }
@@ -34,6 +38,7 @@ public class DamageEnemies : MonoBehaviour
         foreach (Enemy enemy in enemies)
         {
             enemy.TakeDamage();
+            enemy.SlowDown();
         }
     }
 }
