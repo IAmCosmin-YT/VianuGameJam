@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
-  cameraShake: {fileID: 0}
+  cameraShake: {fileID: 519420033}
   x: 0
   healthbar: {fileID: 1430970682}
 --- !u!1 &1819271763
