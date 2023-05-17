@@ -1,20 +1,31 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float speed = 4;
-    void Update()
+    [SerializeField] public float health = 1;
+    [SerializeField] private soundManager soundManager;
+
+    private void Start()
     {
-        Vector2 pos = Vector2.MoveTowards(transform.position, Vector2.zero, speed*Time.deltaTime);
-        transform.position = pos;
+        soundManager = GameObject.Find("SoundManager").GetComponent<soundManager>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
     {
-        if(other.CompareTag("Magician") || other.CompareTag("Player")){
+        Vector2 pos = Vector2.MoveTowards(transform.position, Vector2.zero, speed * Time.deltaTime);
+        transform.position = pos;
+        if (health <= 0)
+        {
+            soundManager.PlayDieAudio();
             Destroy(gameObject);
         }
+    }
+
+    public void TakeDamage()
+    {
+        health -= Time.deltaTime * 2;
     }
 }
