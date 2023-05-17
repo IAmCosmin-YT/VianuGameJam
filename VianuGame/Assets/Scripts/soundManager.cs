@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class soundManager : MonoBehaviour
+public class soundManager: MonoBehaviour
 {
-    [SerializeField] AudioSource dieAudio;
+    public AudioSource source;
 
-    public void PlayDieAudio()
-    {
-        dieAudio.Play();
+    public void PlaySound(AudioClip clip){
+        source.clip = clip;
+        source.Play();
+        
     }
+
 }
