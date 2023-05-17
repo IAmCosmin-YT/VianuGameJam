@@ -13,8 +13,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collision");
-        if(other.CompareTag("Magician")){
+        if(other.CompareTag("Magician") || other.CompareTag("Player")){
             Destroy(gameObject);
         }
     }
