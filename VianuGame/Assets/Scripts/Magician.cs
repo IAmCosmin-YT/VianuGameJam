@@ -28,13 +28,15 @@ public class Magician : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            StartCoroutine(disableShake());
+            //StartCoroutine(disableShake());
+            cameraShake.SetBool("cameraShake", true);
             health--;
             Destroy(other.gameObject);
         }
 
         if (health == 0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    /*
     private IEnumerator disableShake()
     {
         if (!cameraShake.GetBool("cameraShake"))
@@ -43,5 +45,5 @@ public class Magician : MonoBehaviour
             yield return new WaitForSeconds(.3f);
             cameraShake.SetBool("cameraShake", false);
         }
-    }
+    }*/
 }

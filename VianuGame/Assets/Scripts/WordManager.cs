@@ -9,7 +9,8 @@ public class WordManager : MonoBehaviour
     private Word activeWord;
     public Text text, progress;
     public Score score;
-    //public WordSpawner wordSpawner;
+    public soundManager soundManager;
+    public AudioClip sound;
     private bool hasActiveWord;
     private int increment = 0;
 
@@ -31,6 +32,8 @@ public class WordManager : MonoBehaviour
                 AddWord();
                 score.Increment();
                 progress.text = ++increment + "/" + score.maxWords;
+                soundManager.source.pitch = 1;
+                soundManager.PlaySound(sound);
             }
         }
         else{

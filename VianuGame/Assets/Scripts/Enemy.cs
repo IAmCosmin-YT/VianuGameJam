@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public float speedCopy;
     public float health = 1;
     private soundManager soundManager;
+    [SerializeField] public AudioClip sound;
 
     private void Start()
     {
@@ -21,7 +22,8 @@ public class Enemy : MonoBehaviour
         transform.position = pos;
         if (health <= 0)
         {
-            soundManager.PlayDieAudio();
+            soundManager.source.pitch = Random.Range(0.8f, 1.2f);
+            soundManager.PlaySound(sound);
             Destroy(gameObject);
         }
     }
