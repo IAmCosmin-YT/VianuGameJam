@@ -11,7 +11,7 @@ public class Score : MonoBehaviour
     [SerializeField] private float imageSizeAdder;
 
     private void Start() {
-        imageSizeAdder = image.fillAmount / maxWords * 1.0f;
+        imageSizeAdder = 1.0f / PlayerPrefs.GetInt("maxWords") * 1.0f;
         image.fillAmount = 0;
     }
     public void Increment(){
@@ -19,6 +19,7 @@ public class Score : MonoBehaviour
     }
     private void Update()
     {
+        maxWords = PlayerPrefs.GetInt("maxWords");
         if(image.fillAmount < imageSizeAdder * nr)
         {
             image.fillAmount += Time.deltaTime * 1.5f;

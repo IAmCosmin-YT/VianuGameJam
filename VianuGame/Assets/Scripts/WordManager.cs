@@ -17,7 +17,7 @@ public class WordManager : MonoBehaviour
 
     private void Start() {
         AddWord();
-        progress.text = increment + "/" + score.maxWords;
+        resetTotalWords();
     }
     public void AddWord(){
         Word word = new Word(WordGenerator.GetRandomWord(), text);
@@ -50,9 +50,13 @@ public class WordManager : MonoBehaviour
         if(hasActiveWord && activeWord.WordTyped()){
             hasActiveWord = false;
             words.Remove(activeWord);
-            if(score.maxWords == increment){
+            if(PlayerPrefs.GetInt("maxWords") == score.nr){
                 winMenuManager.OpenMenu();
             }
         }
+    }
+    public void resetTotalWords()
+    {
+        progress.text = increment + "/" + PlayerPrefs.GetInt("maxWords");
     }
 }

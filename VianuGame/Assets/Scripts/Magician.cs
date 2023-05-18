@@ -17,6 +17,7 @@ public class Magician : MonoBehaviour
     [SerializeField] private GameObject manager;
     [SerializeField] private GameObject zana;
     [SerializeField] private GameObject endMenu;
+    [SerializeField] private flowerReviver flower;
     [SerializeField] private GameObject[] enemies;
 
 
@@ -46,8 +47,9 @@ public class Magician : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if (healthbar.fillAmount == 0)
+        if (health == 0)
         {
+            flower.enabled = false;
             manager.SetActive(false);
             foreach(GameObject enemy in enemies)
             {

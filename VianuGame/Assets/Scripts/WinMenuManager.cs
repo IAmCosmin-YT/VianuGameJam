@@ -10,6 +10,7 @@ public class WinMenuManager : MonoBehaviour
     [SerializeField] private GameObject manager;
     [SerializeField] private GameObject zana;
     [SerializeField] private GameObject winMenu;
+    [SerializeField] private flowerReviver flower;
     [SerializeField] private GameObject[] enemies;
 
     [SerializeField] Score Score;
@@ -18,6 +19,7 @@ public class WinMenuManager : MonoBehaviour
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if(Score.nr == Score.maxWords)
         {
+            flower.enabled = false;
             manager.SetActive(false);
             foreach (GameObject enemy in enemies)
             {

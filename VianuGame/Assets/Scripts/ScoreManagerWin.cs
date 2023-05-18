@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManagerWin : MonoBehaviour
 {
     [SerializeField] float time = 0f;
     [SerializeField] int score = 0;
@@ -24,7 +24,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
-        if (magician.health > 0)
+        if (PlayerPrefs.GetInt("maxWords") > wordScore.nr)
         {
             time += Time.deltaTime;
             score = magician.enemiesKilled;
@@ -35,7 +35,7 @@ public class ScoreManager : MonoBehaviour
                 UpdateBestScoreText();
                 PlayerPrefs.SetInt("BestScore", bestScore);
             }
-            WordsText.text = $"Words: {wordScore.nr}";
+            WordsText.text = $"Words: {wordScore.nr+1}";
 
             UpdateTimeText();
             UpdateScoreText();
