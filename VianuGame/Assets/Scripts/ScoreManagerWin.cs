@@ -9,7 +9,7 @@ public class ScoreManagerWin : MonoBehaviour
     [SerializeField] int maxwords;
     [SerializeField] int score = 0;
     [SerializeField] int bestScore = 0;
-    [SerializeField] Score wordScore;
+    [SerializeField] WordManager wordScore;
     [SerializeField] Magician magician;
 
     [SerializeField] Text TimeText;
@@ -26,7 +26,7 @@ public class ScoreManagerWin : MonoBehaviour
 
     private void Update()
     {
-        if (maxwords > wordScore.nr)
+        if (maxwords > wordScore.score)
         {
             time += Time.deltaTime;
             score = magician.enemiesKilled;
@@ -37,7 +37,7 @@ public class ScoreManagerWin : MonoBehaviour
                 UpdateBestScoreText();
                 PlayerPrefs.SetInt("BestScore", bestScore);
             }
-            WordsText.text = $"Words: {wordScore.nr+1}";
+            WordsText.text = $"Words: {maxwords}";
 
             UpdateTimeText();
             UpdateScoreText();

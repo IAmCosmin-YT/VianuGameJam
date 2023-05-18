@@ -8,7 +8,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] float time = 0f;
     [SerializeField] int score = 0;
     [SerializeField] int bestScore = 0;
-    [SerializeField] Score wordScore;
+    [SerializeField] WordManager wordScore;
     [SerializeField] Magician magician;
 
     [SerializeField] Text TimeText;
@@ -35,7 +35,7 @@ public class ScoreManager : MonoBehaviour
                 UpdateBestScoreText();
                 PlayerPrefs.SetInt("BestScore", bestScore);
             }
-            WordsText.text = $"Words: {wordScore.nr}";
+            WordsText.text = $"Words: {wordScore.score}";
 
             UpdateTimeText();
             UpdateScoreText();

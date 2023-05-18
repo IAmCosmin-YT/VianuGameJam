@@ -1,64 +1,91 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WordManager : MonoBehaviour
 {
-    public List<Word> words;
-    private Word activeWord;
-    public Text text, progress;
-    public Score score;
-    public Magician mage;
-    public soundManager soundManager;
-    public AudioClip sound;
-    public WinMenuManager winMenuManager;
-    private bool hasActiveWord;
-    private int increment = 0;
+    public Text wordText;
+    public int score = 0;
+    public int maxWords = 0;
+    public float imageSizeAdder = 0;
+    public TextAsset wordFile;
+    [SerializeField] Image imageFiller;
+    [SerializeField] WinMenuManager winReq;
 
-    private void Start() {
-        AddWord();
-        resetTotalWords();
-    }
-    public void AddWord(){
-        Word word = new Word(WordGenerator.GetRandomWord(), text);
-        words.Add(word);
+    [SerializeField] Text howMuchToCompletion;
+
+    private string[] words;
+    private string currentWord;
+    private bool isWordCompleted = false;
+
+    [SerializeField] AudioSource correctWord;
+
+    private void Start()
+    {
+        maxWords = PlayerPrefs.GetInt("maxWords");
+        UpdateProgressionText();
+        LoadWords();
+        LoadRandomWord();
+        imageSizeAdder = 1.0f / PlayerPrefs.GetInt("maxWords") * 1.0f;
+        imageFiller.fillAmount = 0;
     }
 
-    public void TypeLetter(char letter){
-        if(hasActiveWord){
-            if(activeWord.GetNextLetter() == letter){
-                activeWord.TypeLetter();
-            }
-            if(activeWord.WordTyped()){
-                mage.Heal();
-                AddWord();
-                score.Increment();
-                progress.text = ++increment + "/" + score.maxWords;
-                soundManager.source.pitch = 1;
-                soundManager.PlaySound(sound);
-            }
+    private void LoadWords()
+    {
+        if (wordFile != null)
+        {
+            words = wordFile.text.Split('\n');
         }
-        else{
-            foreach(Word word in words){
-                if(word.GetNextLetter() == letter){
-                    activeWord = word;
-                    hasActiveWord = true;
-                    word.TypeLetter();
-                    break;
+    }
+
+    private void LoadRandomWord()
+    {
+        if (words != null && words.Length > 0)
+        {
+            currentWord = words[Random.Range(0, words.Length)].Trim();
+            wordText.text = currentWord;
+            isWordCompleted = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (!isWordCompleted && Input.anyKeyDown)
+        {
+            char firstLetter = currentWord[0];
+            if (Input.GetKeyDown(firstLetter.ToString()))
+            {
+                currentWord = currentWord.Substring(1);
+                wordText.text = currentWord;
+
+                if (currentWord.Length == 0)
+                {
+                    isWordCompleted = true;
+                    correctWord.Play();
+                    score++;
+                    UpdateProgressionText();
+                    NextWord();
                 }
             }
         }
-        if(hasActiveWord && activeWord.WordTyped()){
-            hasActiveWord = false;
-            words.Remove(activeWord);
-            if(PlayerPrefs.GetInt("maxWords") == score.nr){
-                winMenuManager.OpenMenu();
-            }
+        winReq.OpenMenu();
+        updateFillAmount();
+    }
+
+    private void NextWord()
+    {
+        LoadRandomWord();
+    }
+    void updateFillAmount()
+    {
+        if (imageFiller.fillAmount < imageSizeAdder * score)
+        {
+            imageFiller.fillAmount += Time.deltaTime * 1.5f;
         }
     }
-    public void resetTotalWords()
+    void UpdateProgressionText()
     {
-        progress.text = increment + "/" + PlayerPrefs.GetInt("maxWords");
+        howMuchToCompletion.text = score + "/" + PlayerPrefs.GetInt("maxWords");
     }
 }

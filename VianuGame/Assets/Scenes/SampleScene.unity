@@ -3307,11 +3307,11 @@ MonoBehaviour:
   bgA: {fileID: 876723909}
   menuA: {fileID: 1080079948}
   manager: {fileID: 1925263590}
+  managerScript: {fileID: 1925263592}
   zana: {fileID: 666014559}
   winMenu: {fileID: 1297357239}
   flower: {fileID: 1224386793}
   enemies: []
-  Score: {fileID: 1925263595}
 --- !u!114 &1107044561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3359,7 +3359,7 @@ MonoBehaviour:
   time: 0
   score: 0
   bestScore: 0
-  wordScore: {fileID: 1925263595}
+  wordScore: {fileID: 1925263592}
   magician: {fileID: 1744035621}
   TimeText: {fileID: 1810917174}
   WordsText: {fileID: 778992645}
@@ -3381,7 +3381,7 @@ MonoBehaviour:
   maxwords: 0
   score: 0
   bestScore: 0
-  wordScore: {fileID: 1925263595}
+  wordScore: {fileID: 1925263592}
   magician: {fileID: 1744035621}
   TimeText: {fileID: 1401249076}
   WordsText: {fileID: 471350835}
@@ -3740,7 +3740,7 @@ MonoBehaviour:
   - {fileID: 472468097}
   - {fileID: 2104975562}
   tree: {fileID: 121025942}
-  score: {fileID: 1925263595}
+  score: {fileID: 1925263592}
   cameraSkybox: {fileID: 519420031}
   colorGradient:
     serializedVersion: 2
@@ -5781,10 +5781,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1925263593}
-  - component: {fileID: 1925263595}
   - component: {fileID: 1925263594}
   - component: {fileID: 1925263592}
-  - component: {fileID: 1925263591}
+  - component: {fileID: 1925263595}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -5792,19 +5791,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1925263591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925263590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29175f489dc82441d8b3158d16b8ee07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wordManager: {fileID: 1925263592}
 --- !u!114 &1925263592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5817,14 +5803,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 816401807d4074a9e843173cc7d03607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  words: []
-  text: {fileID: 5354945781245034981}
-  progress: {fileID: 1872166479}
-  score: {fileID: 1925263595}
-  mage: {fileID: 1744035621}
-  soundManager: {fileID: 1202608076}
-  sound: {fileID: 8300000, guid: 34ea9be229a464b3e966beb2517d85c9, type: 3}
-  winMenuManager: {fileID: 1107044560}
+  wordText: {fileID: 5354945781245034981}
+  score: 0
+  maxWords: 0
+  imageSizeAdder: 0
+  wordFile: {fileID: 4900000, guid: af1188682d2e743f7a8fe909512f1ffa, type: 3}
+  imageFiller: {fileID: 733858944}
+  winReq: {fileID: 1107044560}
+  howMuchToCompletion: {fileID: 1872166479}
+  correctWord: {fileID: 1925263595}
 --- !u!4 &1925263593
 Transform:
   m_ObjectHideFlags: 0
@@ -5854,22 +5841,102 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnRate: 2
   enemyPrefab: {fileID: 7395891622293041516, guid: ae5dbd5b2667b403289b4a46f89395f3, type: 3}
---- !u!114 &1925263595
-MonoBehaviour:
+--- !u!82 &1925263595
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925263590}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f029ed38ed31a4728ba44e85a9422e5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 733858944}
-  nr: 0
-  maxWords: 20
-  imageSizeAdder: 0
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 34ea9be229a464b3e966beb2517d85c9, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.572
+  m_Pitch: 1.81
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 166
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1941604191
 GameObject:
   m_ObjectHideFlags: 0

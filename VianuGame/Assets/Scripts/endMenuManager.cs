@@ -76,5 +76,11 @@ public class endMenuManager : MonoBehaviour
         difficultyTextWin.text = PlayerPrefs.GetString("difficultyText");
         PlayerPrefs.SetInt("maxWords", maxWords);
     }
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("maxWords", maxWords);
+        PlayerPrefs.SetInt("difficulty", difficulty);
+
+    }
 
 }

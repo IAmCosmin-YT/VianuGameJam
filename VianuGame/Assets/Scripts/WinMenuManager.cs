@@ -8,16 +8,17 @@ public class WinMenuManager : MonoBehaviour
     [SerializeField] private Animator bgA;
     [SerializeField] private Animator menuA;
     [SerializeField] private GameObject manager;
+    [SerializeField] private WordManager managerScript;
     [SerializeField] private GameObject zana;
     [SerializeField] private GameObject winMenu;
     [SerializeField] private flowerReviver flower;
     [SerializeField] private GameObject[] enemies;
 
-    [SerializeField] Score Score;
+    
     public void OpenMenu()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if(Score.nr == Score.maxWords)
+        if(managerScript.score >= PlayerPrefs.GetInt("maxWords"))
         {
             flower.enabled = false;
             manager.SetActive(false);
