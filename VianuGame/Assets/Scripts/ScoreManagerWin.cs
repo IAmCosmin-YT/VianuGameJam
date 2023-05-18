@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ScoreManagerWin : MonoBehaviour
 {
     [SerializeField] float time = 0f;
+    [SerializeField] int maxwords;
     [SerializeField] int score = 0;
     [SerializeField] int bestScore = 0;
     [SerializeField] Score wordScore;
@@ -19,12 +20,13 @@ public class ScoreManagerWin : MonoBehaviour
     private void Start()
     {
         bestScore = PlayerPrefs.GetInt("BestScore", 0);
+        maxwords = PlayerPrefs.GetInt("maxWords");
         UpdateBestScoreText();
     }
 
     private void Update()
     {
-        if (PlayerPrefs.GetInt("maxWords") > wordScore.nr)
+        if (maxwords > wordScore.nr)
         {
             time += Time.deltaTime;
             score = magician.enemiesKilled;

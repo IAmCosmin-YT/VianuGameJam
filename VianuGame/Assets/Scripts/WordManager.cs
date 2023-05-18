@@ -9,6 +9,7 @@ public class WordManager : MonoBehaviour
     private Word activeWord;
     public Text text, progress;
     public Score score;
+    public Magician mage;
     public soundManager soundManager;
     public AudioClip sound;
     public WinMenuManager winMenuManager;
@@ -30,6 +31,7 @@ public class WordManager : MonoBehaviour
                 activeWord.TypeLetter();
             }
             if(activeWord.WordTyped()){
+                mage.Heal();
                 AddWord();
                 score.Increment();
                 progress.text = ++increment + "/" + score.maxWords;

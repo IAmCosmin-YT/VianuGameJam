@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class Magician : MonoBehaviour
 {
-    [SerializeField] public int health = 5;
+    [SerializeField] public float health = 5;
     [SerializeField] private Animator cameraShake;
     [SerializeField] private AudioSource thunder;
-    [SerializeField] private int x;
+    [SerializeField] private float x;
     [SerializeField] private Image healthbar;
 
     [SerializeField] private Animator bgA;
@@ -35,6 +35,10 @@ public class Magician : MonoBehaviour
         {
             healthbar.fillAmount -= Time.deltaTime * 2;
         }
+        if (healthbar.fillAmount * x < health)
+        {
+            healthbar.fillAmount += Time.deltaTime * 2;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -47,7 +51,7 @@ public class Magician : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if (health == 0)
+        if (health <= 0)
         {
             flower.enabled = false;
             manager.SetActive(false);
@@ -70,6 +74,13 @@ public class Magician : MonoBehaviour
             thunder.Play();
             yield return new WaitForSeconds(.3f);
             cameraShake.SetBool("cameraShake", false);
+        }
+    }
+    public void Heal()
+    {
+        if(health < x)
+        {
+            health += .25f;
         }
     }
 }
