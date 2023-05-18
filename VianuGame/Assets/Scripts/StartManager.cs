@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class StartManager : MonoBehaviour
 {
-    [SerializeField] private GameObject tutorial;
+    [SerializeField] private GameObject tutorial, story;
+    private DialogManager dialogManager;
+    [SerializeField][TextArea(3, 10)] public string[] sentences;
     private bool isActive = false;
     private Color alpha0 = new Color(1f, 1f, 1f, 0f);
     private Color alpha1 = new Color(1f, 1f, 1f, 1f);
@@ -71,5 +73,11 @@ public class StartManager : MonoBehaviour
         {
             StartCoroutine(FadeOutTutorial());
         }
+    }
+
+    public void StartStory(){
+        story.SetActive(true);
+        dialogManager = GetComponent<DialogManager>();
+        dialogManager.Story(sentences);
     }
 }
