@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DialogManager : MonoBehaviour
 {
     public Queue<string> sentences;
-    private StartManager manager;
+    [SerializeField] private StartManager manager;
     [SerializeField] private Text text;
 
     private void Start() {
