@@ -32,46 +32,18 @@ public class StartManager : MonoBehaviour
     public void Tutorial()
     {
         tutorial.SetActive(true);
-        StartCoroutine(FadeInTutorial());
         isActive = true;
-    }
-
-    private IEnumerator FadeInTutorial()
-    {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < fadeDuration)
-        {
-            float alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
-            tutorial.GetComponent<Image>().color = new Color(1f, 1f, 1f, alpha);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        tutorial.GetComponent<Image>().color = alpha1;
-    }
-
-    private IEnumerator FadeOutTutorial()
-    {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < fadeDuration)
-        {
-            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
-            tutorial.GetComponent<Image>().color = new Color(1f, 1f, 1f, alpha);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        tutorial.SetActive(false);
-        isActive = false;
+        tutorial.GetComponent<Animator>().SetBool("active", true);
     }
 
     private void Update()
     {
         if (isActive && Input.anyKeyDown)
         {
-            StartCoroutine(FadeOutTutorial());
+            isActive = false;
+            tutorial.SetActive(false);
+            tutorial.GetComponent<Animator>().SetBool("active", false);
+
         }
     }
 
