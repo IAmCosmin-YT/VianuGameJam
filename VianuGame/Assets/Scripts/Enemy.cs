@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] public AudioClip sound;
     private Animator animator;
+    public ParticleSystem particle;
 
     private void Start()
     {
@@ -34,6 +35,7 @@ public class Enemy : MonoBehaviour
             soundManager.source.pitch = Random.Range(0.8f, 1.2f);
             soundManager.PlaySound(sound);
             Destroy(gameObject);
+            Instantiate(particle, transform.position, Quaternion.identity);
         }
     }
 

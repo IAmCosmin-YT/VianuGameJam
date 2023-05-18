@@ -155,6 +155,7 @@ MonoBehaviour:
   health: 1
   magician: {fileID: 0}
   sound: {fileID: 8300000, guid: 0855e32c6cb85f84abc13be351d81cb4, type: 3}
+  particle: {fileID: 2816256404658711656, guid: e85855dbb97c8418aa20118db0d5104f, type: 3}
 --- !u!50 &-6690084133287986612
 Rigidbody2D:
   serializedVersion: 4
