@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class StartManager : MonoBehaviour
 {
-    [SerializeField] private GameObject tutorial, story;
+    public GameObject tutorial, story;
     private DialogManager dialogManager;
     [SerializeField][TextArea(3, 10)] public string[] sentences;
     private bool isActive = false;

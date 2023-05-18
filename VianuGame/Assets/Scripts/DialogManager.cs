@@ -23,7 +23,7 @@ public class DialogManager : MonoBehaviour
     }
 
     private void Update() {
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Space) && manager.story.activeInHierarchy){
             DisplayNextSentence();
         }
     }
