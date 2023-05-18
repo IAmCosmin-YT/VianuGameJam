@@ -10,9 +10,6 @@ public class StartManager : MonoBehaviour
     private DialogManager dialogManager;
     [SerializeField][TextArea(3, 10)] public string[] sentences;
     private bool isActive = false;
-    private Color alpha0 = new Color(1f, 1f, 1f, 0f);
-    private Color alpha1 = new Color(1f, 1f, 1f, 1f);
-    private float fadeDuration = .2f;
 
     public void PlayGame()
     {
