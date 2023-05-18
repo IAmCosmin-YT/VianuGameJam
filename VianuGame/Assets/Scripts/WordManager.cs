@@ -11,6 +11,7 @@ public class WordManager : MonoBehaviour
     public Score score;
     public soundManager soundManager;
     public AudioClip sound;
+    public WinMenuManager winMenuManager;
     private bool hasActiveWord;
     private int increment = 0;
 
@@ -49,6 +50,9 @@ public class WordManager : MonoBehaviour
         if(hasActiveWord && activeWord.WordTyped()){
             hasActiveWord = false;
             words.Remove(activeWord);
+            if(score.maxWords == increment){
+                winMenuManager.OpenMenu();
+            }
         }
     }
 }

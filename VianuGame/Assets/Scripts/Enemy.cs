@@ -12,12 +12,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] Magician magician;
 
     [SerializeField] public AudioClip sound;
+    private Animator animator;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         soundManager = GameObject.Find("SoundManager").GetComponent<soundManager>();
         magician = GameObject.FindGameObjectWithTag("Magician").GetComponent<Magician>();
         speedCopy = speed;
+        animator.Play("Valva");
     }
 
     private void Update()

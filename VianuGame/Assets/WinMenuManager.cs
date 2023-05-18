@@ -13,7 +13,7 @@ public class WinMenuManager : MonoBehaviour
     [SerializeField] private GameObject[] enemies;
 
     [SerializeField] Score Score;
-    private void Update()
+    public void OpenMenu()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if(Score.nr == Score.maxWords)

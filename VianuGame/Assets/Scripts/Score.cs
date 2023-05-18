@@ -7,11 +7,10 @@ public class Score : MonoBehaviour
 {
     public Image image;
     [SerializeField] public int nr = 0;
-    public int maxWords;
+    public int maxWords = 20;
     [SerializeField] private float imageSizeAdder;
 
     private void Start() {
-        maxWords = PlayerPrefs.GetInt("maxWords");
         imageSizeAdder = image.fillAmount / maxWords * 1.0f;
         image.fillAmount = 0;
     }
