@@ -7,6 +7,7 @@ public class DialogManager : MonoBehaviour
 {
     public Queue<string> sentences;
     [SerializeField] private StartManager manager;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private Text text;
 
     private void Start() {
@@ -28,10 +29,12 @@ public class DialogManager : MonoBehaviour
         }
     }
     private void DisplayNextSentence(){
-        if(sentences.Count == 0){
-                manager.PlayGame();
-                return;
-            }
+        if(sentences.Count == 0)
+        {
+            audioSource.GetComponent<menuMusic>().active = true;
+            manager.PlayGame();
+            return;
+        }
             string activeSentence = sentences.Dequeue();
             text.text = activeSentence;
     }

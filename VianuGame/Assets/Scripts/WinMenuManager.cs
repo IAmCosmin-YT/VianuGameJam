@@ -18,7 +18,7 @@ public class WinMenuManager : MonoBehaviour
     public void OpenMenu()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        if(managerScript.score >= PlayerPrefs.GetInt("maxWords"))
+        if(managerScript.score >= PlayerPrefs.GetInt("maxWords", 20))
         {
             flower.enabled = false;
             manager.SetActive(false);

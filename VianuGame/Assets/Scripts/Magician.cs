@@ -26,6 +26,7 @@ public class Magician : MonoBehaviour
     private void Start()
     {
         x = health;
+        thunder = GameObject.Find("Thunder").GetComponent<AudioSource>();
     }
 
     private void Update()

@@ -7,18 +7,17 @@ public class Enemy : MonoBehaviour
     public float speed = 1;
     public float speedCopy;
     public float health = 1;
-    private soundManager soundManager;
+    private AudioSource enemyKill;
 
     [SerializeField] Magician magician;
 
-    [SerializeField] public AudioClip sound;
     private Animator animator;
     public ParticleSystem particle;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        soundManager = GameObject.Find("SoundManager").GetComponent<soundManager>();
+        enemyKill = GameObject.Find("KillSlime").GetComponent<AudioSource>();
         magician = GameObject.FindGameObjectWithTag("Magician").GetComponent<Magician>();
         speedCopy = speed;
         animator.Play("Valva");
@@ -32,8 +31,8 @@ public class Enemy : MonoBehaviour
         {
             magician.enemiesKilled++;
             //soundManager.PlayDieAudio();
-            soundManager.source.pitch = Random.Range(0.8f, 1.2f);
-            soundManager.PlaySound(sound);
+            enemyKill.pitch = Random.Range(0.8f, 1.2f);
+            enemyKill.Play();
             Destroy(gameObject);
             Instantiate(particle, transform.position, Quaternion.identity);
         }

@@ -12,7 +12,7 @@ public class Score : MonoBehaviour
 
     private void Start()
     {
-        maxWords = 10 * PlayerPrefs.GetInt("difficulty");
+        maxWords = PlayerPrefs.GetInt("maxWords");
         imageSizeAdder = 1.0f / maxWords * 1.0f;
         image.fillAmount = 0;
     }

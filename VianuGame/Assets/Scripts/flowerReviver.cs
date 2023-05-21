@@ -15,7 +15,7 @@ public class flowerReviver : MonoBehaviour
     private void Update()
     {
         int currentScore = score.score;
-        float percentage = Mathf.Clamp01(currentScore / (float)PlayerPrefs.GetInt("maxWords"));
+        float percentage = Mathf.Clamp01(currentScore / (float)PlayerPrefs.GetInt("maxWords", 20));
         Color targetColor = colorGradient.Evaluate(percentage);
         Color targetColor2 = colorGradient2.Evaluate(percentage);
         Color targetColor3 = colorGradient3.Evaluate(percentage);

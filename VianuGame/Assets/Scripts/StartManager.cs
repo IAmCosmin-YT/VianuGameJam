@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class StartManager : MonoBehaviour
 {
-    public GameObject tutorial, story;
+    public GameObject tutorial, story, options;
     private DialogManager dialogManager;
     [SerializeField][TextArea(3, 10)] public string[] sentences;
     private bool isActive = false;
@@ -26,9 +26,18 @@ public class StartManager : MonoBehaviour
         AudioListener.pause = !AudioListener.pause;
     }
 
+    public void OptionsOpen()
+    {
+        options.GetComponent<Animator>().SetBool("active", true);
+        options.GetComponent<Animator>().speed = 2;
+    }
+    public void OptionsClose()
+    {
+        options.GetComponent<Animator>().SetBool("active", false);
+    }
+
     public void Tutorial()
     {
-        tutorial.SetActive(true);
         isActive = true;
         tutorial.GetComponent<Animator>().SetBool("active", true);
     }
@@ -38,9 +47,7 @@ public class StartManager : MonoBehaviour
         if (isActive && Input.anyKeyDown)
         {
             isActive = false;
-            tutorial.SetActive(false);
             tutorial.GetComponent<Animator>().SetBool("active", false);
-
         }
     }
 

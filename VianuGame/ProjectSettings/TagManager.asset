@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Magician
   - Enemy
+  - SFX
+  - Music
+  - Master
+  - ppvol
   layers:
   - Default
   - TransparentFX

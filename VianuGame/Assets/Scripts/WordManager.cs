@@ -23,6 +23,7 @@ public class WordManager : MonoBehaviour
 
     private void Start()
     {
+        correctWord = GameObject.Find("CorrectWord").GetComponent<AudioSource>();
         maxWords = PlayerPrefs.GetInt("maxWords");
         UpdateProgressionText();
         LoadWords();
@@ -64,13 +65,14 @@ public class WordManager : MonoBehaviour
                     isWordCompleted = true;
                     correctWord.Play();
                     score++;
-                    UpdateProgressionText();
                     NextWord();
                 }
             }
         }
         winReq.OpenMenu();
         updateFillAmount();
+        UpdateProgressionText();
+
     }
 
     private void NextWord()
