@@ -16,8 +16,11 @@ public class Settings : MonoBehaviour
 
     [SerializeField] GameObject audioTab;
     [SerializeField] GameObject videoTab;
-    [SerializeField] GameObject manager;
-    [SerializeField] GameObject[] enemies;
+    [SerializeField] GameObject winMenu;
+    [SerializeField] GameObject loseMenu;
+    [SerializeField] StartManager startManager;
+
+    [SerializeField] PlayerMovement zana;
 
     [SerializeField] AudioMixer audioMixer;
 
@@ -118,24 +121,34 @@ public class Settings : MonoBehaviour
             audioMixer.SetFloat(MIXER_SFX, _MUTE);
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (startManager != null)
         {
-            gameObject.GetComponent<Animator>().SetBool("active", !gameObject.GetComponent<Animator>().GetBool("active"));
-        }
-        if(manager != null)
-        {
-            foreach (GameObject enemy in enemies)
+            if (Input.GetKeyDown(KeyCode.Escape) && !startManager.story.activeInHierarchy)
             {
-                if(enemy != null)
-                    enemy.GetComponent<Enemy>().enabled = !gameObject.GetComponent<Animator>().GetBool("active");
+                SettingsOpen();
             }
-            manager.SetActive(!gameObject.GetComponent<Animator>().GetBool("active"));
-            enemies = GameObject.FindGameObjectsWithTag("Enemy");
         }
+        else if (loseMenu != null && winMenu != null)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) && !loseMenu.activeInHierarchy && !winMenu.activeInHierarchy)
+            {
+                SettingsOpen();
+            }
+        }
+
+        if (gameObject.GetComponent<Animator>().GetBool("active"))
+        {
+            Time.timeScale = 0;
+        }
+        else Time.timeScale = 1;
         
     }
     public void SettingsOpen()
     {
         gameObject.GetComponent<Animator>().SetBool("active", !gameObject.GetComponent<Animator>().GetBool("active"));
+        if(zana != null)
+        {
+            zana.enabled = !gameObject.GetComponent<Animator>().GetBool("active");
+        }
     }
 }

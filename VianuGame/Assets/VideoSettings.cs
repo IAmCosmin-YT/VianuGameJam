@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 
 public class VideoSettings : MonoBehaviour
 {
@@ -38,7 +39,6 @@ public class VideoSettings : MonoBehaviour
     {
         showFPS();
     }
-
     private void Start()
     {
         ppvolume = GameObject.FindGameObjectWithTag("ppvol").GetComponent<PostProcessVolume>();
@@ -49,12 +49,7 @@ public class VideoSettings : MonoBehaviour
         ppvolume.profile.TryGetSettings(out motionBlur);
         ppvolume.profile.TryGetSettings(out lensDistortion);
 
-        fpsTog.isOn = IntToBool(PlayerPrefs.GetInt("fps"));
-        vignetteTog.isOn = IntToBool(PlayerPrefs.GetInt("vignette"));
-        bloomTog.isOn = IntToBool(PlayerPrefs.GetInt("bloom"));
-        chromTog.isOn = IntToBool(PlayerPrefs.GetInt("chromaticAberration"));
-        lensTog.isOn = IntToBool(PlayerPrefs.GetInt("lensDistortion"));
-        motionblurTog.isOn = IntToBool(PlayerPrefs.GetInt("motionBlur"));
+        LoadVar();
     }
 
     public void ToggleVignette()
@@ -113,5 +108,31 @@ public class VideoSettings : MonoBehaviour
         }
         else PlayerPrefs.SetInt("fps", 0);
         fpsText.gameObject.SetActive(fpsTog.isOn);
+    }
+    public void LoadVar()
+    {
+        //show FPS
+        fpsTog.isOn = IntToBool(PlayerPrefs.GetInt("fps"));
+
+        //show Vignette
+        vignetteTog.isOn = IntToBool(PlayerPrefs.GetInt("vignette"));
+        vignette.enabled.value = vignetteTog.isOn;
+
+        //show Bloom
+        bloomTog.isOn = IntToBool(PlayerPrefs.GetInt("bloom"));
+        bloom.enabled.value = bloomTog.isOn;
+
+        //show Chromatic Aberration
+        chromTog.isOn = IntToBool(PlayerPrefs.GetInt("chromaticAberration"));
+        chromaticAberration.enabled.value = chromTog.isOn;
+
+        //show Lens Distortion
+        lensTog.isOn = IntToBool(PlayerPrefs.GetInt("lensDistortion"));
+        lensDistortion.enabled.value = lensTog.isOn;
+
+        //show Motion Blur
+        motionblurTog.isOn = IntToBool(PlayerPrefs.GetInt("motionBlur"));
+        motionBlur.enabled.value = motionblurTog.isOn;
+
     }
 }

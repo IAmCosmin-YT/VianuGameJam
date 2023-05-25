@@ -9,18 +9,14 @@ public class endMenuManager : MonoBehaviour
 {
 
     [SerializeField]int maxWords;
-    [SerializeField]int difficulty = 2;
+    [SerializeField]int difficulty;
     [SerializeField]Text difficultyText;
     [SerializeField]Text difficultyTextWin;
 
     // Quit the application
     public void QuitApp()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
+        SceneManager.LoadScene(0);
     }
 
     // Restart the current level
@@ -73,7 +69,8 @@ public class endMenuManager : MonoBehaviour
         }
         maxWords = 10 * PlayerPrefs.GetInt("difficulty");
         difficultyText.text = PlayerPrefs.GetString("difficultyText");
-        difficultyTextWin.text = PlayerPrefs.GetString("difficultyText");
+        if (difficultyTextWin != null)
+            difficultyTextWin.text = PlayerPrefs.GetString("difficultyText");
         PlayerPrefs.SetInt("maxWords", maxWords);
     }
     private void OnApplicationQuit()

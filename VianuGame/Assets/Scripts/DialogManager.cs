@@ -11,6 +11,8 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private Text text;
 
     private void Start() {
+        audioSource = GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<AudioSource>();
+        audioSource.volume = 1;
         manager = GetComponent<StartManager>();
         sentences = new Queue<string>();
     }
@@ -23,19 +25,15 @@ public class DialogManager : MonoBehaviour
         text.text = sentences.Peek();
     }
 
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.Space) && manager.story.activeInHierarchy){
-            DisplayNextSentence();
-        }
-    }
-    private void DisplayNextSentence(){
+    public void DisplayNextSentence(){
         if(sentences.Count == 0)
         {
             audioSource.GetComponent<menuMusic>().active = true;
             manager.PlayGame();
             return;
         }
-            string activeSentence = sentences.Dequeue();
-            text.text = activeSentence;
+        Debug.Log("DisplayNextSentence called");
+        string activeSentence = sentences.Dequeue();
+        text.text = activeSentence;
     }
 }

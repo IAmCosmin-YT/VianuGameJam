@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class StartManager : MonoBehaviour
 {
-    public GameObject tutorial, story, options;
+    public GameObject tutorial, story, options, credits;
     private DialogManager dialogManager;
     [SerializeField][TextArea(3, 10)] public string[] sentences;
     private bool isActive = false;
+    private bool isActiveCredits = false;
+
 
     public void PlayGame()
     {
@@ -18,7 +20,11 @@ public class StartManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
     }
 
     public void Mute()
@@ -39,7 +45,14 @@ public class StartManager : MonoBehaviour
     public void Tutorial()
     {
         isActive = true;
+        tutorial.GetComponent<Animator>().speed = 2.5f;
         tutorial.GetComponent<Animator>().SetBool("active", true);
+    }
+    public void Credits()
+    {
+        isActiveCredits = true;
+        credits.GetComponent<Animator>().speed = 2.5f;
+        credits.GetComponent<Animator>().SetBool("active", true);
     }
 
     private void Update()
@@ -48,6 +61,11 @@ public class StartManager : MonoBehaviour
         {
             isActive = false;
             tutorial.GetComponent<Animator>().SetBool("active", false);
+        }
+        if (isActiveCredits && Input.anyKeyDown)
+        {
+            isActiveCredits = false;
+            credits.GetComponent<Animator>().SetBool("active", false);
         }
     }
 

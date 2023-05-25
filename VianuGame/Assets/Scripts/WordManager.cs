@@ -12,6 +12,7 @@ public class WordManager : MonoBehaviour
     public TextAsset wordFile;
     [SerializeField] Image imageFiller;
     [SerializeField] WinMenuManager winReq;
+    [SerializeField] Magician magician;
 
     [SerializeField] Text howMuchToCompletion;
 
@@ -30,6 +31,7 @@ public class WordManager : MonoBehaviour
         LoadRandomWord();
         imageSizeAdder = 1.0f / PlayerPrefs.GetInt("maxWords") * 1.0f;
         imageFiller.fillAmount = 0;
+        howMuchToCompletion.text = $"{score}/{maxWords}";
     }
 
     private void LoadWords()
@@ -52,7 +54,7 @@ public class WordManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isWordCompleted && Input.anyKeyDown)
+        if (!isWordCompleted && Input.anyKeyDown && Time.timeScale != 0)
         {
             char firstLetter = currentWord[0];
             if (Input.GetKeyDown(firstLetter.ToString()))
@@ -63,6 +65,7 @@ public class WordManager : MonoBehaviour
                 if (currentWord.Length == 0)
                 {
                     isWordCompleted = true;
+                    magician.Heal();
                     correctWord.Play();
                     score++;
                     NextWord();
