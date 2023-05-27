@@ -6,6 +6,8 @@ public class LetterFall : MonoBehaviour
 {
     [SerializeField] Sprite[] letters;
     [SerializeField] WordManager wordManager;
+    [SerializeField] ParticleSystem particle;
+    [SerializeField] Animator animator;
 
     public void SpawnGroupedLetters()
     {
@@ -32,10 +34,14 @@ public class LetterFall : MonoBehaviour
                     SpriteRenderer spriteRenderer = letterObject.AddComponent<SpriteRenderer>();
                     PolygonCollider2D polygonCollider2D = letterObject.AddComponent<PolygonCollider2D>();
                     Rigidbody2D rigidbody2D = letterObject.AddComponent<Rigidbody2D>();
+                    UnityEditorInternal.ComponentUtility.CopyComponent(animator);
+                    UnityEditorInternal.ComponentUtility.PasteComponentAsNew(letterObject);
+                    UnityEditorInternal.ComponentUtility.CopyComponent(particle);
+                    UnityEditorInternal.ComponentUtility.PasteComponentAsNew(letterObject);
 
                     letterObject.transform.position = new Vector3(transform.position.x + randomX + c, transform.position.y + randomY, 0f);
                     letterObject.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + Random.Range(-20, 20));
-                    letterObject.transform.localScale = new Vector3(.2f, .2f, .2f); // Adjust the scale as per your desired size
+                    letterObject.transform.localScale = new Vector3(.3f, .3f, .3f); // Adjust the scale as per your desired size
                     letterObject.tag = "Letter";
 
                     polygonCollider2D.isTrigger = true;
@@ -65,7 +71,7 @@ public class LetterFall : MonoBehaviour
 
             letterObject.transform.position = new Vector3(transform.position.x + randomX + c, transform.position.y + randomY, 0f);
             letterObject.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + Random.Range(-20, 20));
-            letterObject.transform.localScale = new Vector3(.2f, .2f, .2f); // Adjust the scale as per your desired size
+            letterObject.transform.localScale = new Vector3(.3f, .3f, .3f); // Adjust the scale as per your desired size
             letterObject.tag = "Letter";
 
             polygonCollider2D.isTrigger = true;
