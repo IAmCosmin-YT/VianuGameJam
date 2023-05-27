@@ -11,6 +11,7 @@ public class VideoSettings : MonoBehaviour
     private Bloom bloom;
     private MotionBlur motionBlur;
     private LensDistortion lensDistortion;
+    [SerializeField] Animator cShake;
 
     [SerializeField] Toggle vignetteTog;
     [SerializeField] Toggle bloomTog;
@@ -18,6 +19,8 @@ public class VideoSettings : MonoBehaviour
     [SerializeField] Toggle motionblurTog;
     [SerializeField] Toggle lensTog;
     [SerializeField] Toggle fpsTog;
+    [SerializeField] Toggle vsyncTog;
+    [SerializeField] Toggle cShakeTog;
 
     [SerializeField] Text fpsText;
     private float deltaTime = 0.0f;
@@ -87,7 +90,6 @@ public class VideoSettings : MonoBehaviour
         else
             PlayerPrefs.SetInt("motionBlur", 0);
     }
-
     public void ToggleLensDistortion()
     {
         lensDistortion.enabled.value = !lensDistortion.enabled.value;
@@ -95,6 +97,38 @@ public class VideoSettings : MonoBehaviour
             PlayerPrefs.SetInt("lensDistortion", 1);
         else
             PlayerPrefs.SetInt("lensDistortion", 0);
+    }
+    public void ToggleVSync()
+    {
+        if (QualitySettings.vSyncCount == 0)
+        {
+            PlayerPrefs.SetInt("vSync", 1);
+            QualitySettings.vSyncCount = 1;
+        }
+        else
+        { 
+            PlayerPrefs.SetInt("vSync", 0);
+            QualitySettings.vSyncCount = 0;
+
+        }
+    }
+    public void ToggleCameraShake()
+    {
+        if (cShake != null)
+        {
+            cShake.enabled = !cShake.enabled;
+            if (cShake.enabled)
+                PlayerPrefs.SetInt("cShake", 1);
+            else
+                PlayerPrefs.SetInt("cShake", 0);
+        }
+        else
+        {
+            if (cShakeTog.isOn)
+                PlayerPrefs.SetInt("cShake", 1);
+            else
+                PlayerPrefs.SetInt("cShake", 0);
+        }
     }
     public void showFPS()
     {
@@ -117,6 +151,15 @@ public class VideoSettings : MonoBehaviour
         //show Vignette
         vignetteTog.isOn = IntToBool(PlayerPrefs.GetInt("vignette"));
         vignette.enabled.value = vignetteTog.isOn;
+
+        //toggle vsync
+        vsyncTog.isOn = IntToBool(PlayerPrefs.GetInt("vSync"));
+        QualitySettings.vSyncCount = PlayerPrefs.GetInt("vSync");
+
+        //toggle camera shake
+        cShakeTog.isOn = IntToBool(PlayerPrefs.GetInt("cShake"));
+        if (cShake != null)
+            cShake.enabled = cShakeTog.isOn;
 
         //show Bloom
         bloomTog.isOn = IntToBool(PlayerPrefs.GetInt("bloom"));

@@ -17,7 +17,7 @@ public class WordManager : MonoBehaviour
     [SerializeField] Text howMuchToCompletion;
 
     private string[] words;
-    private string currentWord;
+    [HideInInspector]public string currentWord;
     private bool isWordCompleted = false;
 
     [SerializeField] AudioSource correctWord;
@@ -76,6 +76,21 @@ public class WordManager : MonoBehaviour
         updateFillAmount();
         UpdateProgressionText();
 
+    }
+
+    public void subtractLetter()
+    {
+        currentWord = currentWord.Substring(1);
+        wordText.text = currentWord;
+
+        if (currentWord.Length == 0)
+        {
+            isWordCompleted = true;
+            magician.Heal();
+            correctWord.Play();
+            score++;
+            NextWord();
+        }
     }
 
     private void NextWord()

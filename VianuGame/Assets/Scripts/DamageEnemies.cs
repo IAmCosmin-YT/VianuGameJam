@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class DamageEnemies : MonoBehaviour
 {
     private List<Enemy> enemies = new List<Enemy>();
+    [SerializeField] WordManager wordManager;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,6 +15,11 @@ public class DamageEnemies : MonoBehaviour
             {
                 enemies.Add(enemy);
             }
+        }
+        if (collision.CompareTag("Letter"))
+        {
+            wordManager.subtractLetter();
+            Destroy(collision.gameObject);
         }
     }
 
