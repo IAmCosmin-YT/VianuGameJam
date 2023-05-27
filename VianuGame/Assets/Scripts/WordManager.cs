@@ -10,20 +10,22 @@ public class WordManager : MonoBehaviour
     public int maxWords = 0;
     public float imageSizeAdder = 0;
     public TextAsset wordFile;
+    public TextAsset wordFilePhone;
     [SerializeField] Image imageFiller;
     [SerializeField] WinMenuManager winReq;
     [SerializeField] Magician magician;
-
+    RuntimePlatform currentPlatform;
     [SerializeField] Text howMuchToCompletion;
 
     private string[] words;
-    [HideInInspector]public string currentWord;
+    [HideInInspector] public string currentWord;
     private bool isWordCompleted = false;
 
     [SerializeField] AudioSource correctWord;
 
     private void Start()
     {
+        currentPlatform = PlatformDetector.platform;
         correctWord = GameObject.Find("CorrectWord").GetComponent<AudioSource>();
         maxWords = PlayerPrefs.GetInt("maxWords");
         UpdateProgressionText();
@@ -36,9 +38,13 @@ public class WordManager : MonoBehaviour
 
     private void LoadWords()
     {
-        if (wordFile != null)
+        if (wordFile != null && (currentPlatform != RuntimePlatform.Android || currentPlatform != RuntimePlatform.IPhonePlayer))
         {
             words = wordFile.text.Split('\n');
+        }
+        else if (wordFilePhone != null && (currentPlatform == RuntimePlatform.Android || currentPlatform == RuntimePlatform.IPhonePlayer))
+        {
+            words = wordFilePhone.text.Split('\n');
         }
     }
 
@@ -53,6 +59,15 @@ public class WordManager : MonoBehaviour
     }
 
     private void Update()
+    {
+        subtractLetter();
+        winReq.OpenMenu();
+        updateFillAmount();
+        UpdateProgressionText();
+
+    }
+
+    public void subtractLetter()
     {
         if (!isWordCompleted && Input.anyKeyDown && Time.timeScale != 0)
         {
@@ -72,15 +87,22 @@ public class WordManager : MonoBehaviour
                 }
             }
         }
-        winReq.OpenMenu();
-        updateFillAmount();
-        UpdateProgressionText();
-
     }
 
-    public void subtractLetter()
+    public void subtractSameLetters(char input)
     {
-        currentWord = currentWord.Substring(1);
+        string newWord = "";
+
+        foreach (char letter in currentWord)
+        {
+            if (letter != input)
+            {
+                Debug.Log(newWord);
+                newWord += letter;
+            }
+        }
+
+        currentWord = newWord;
         wordText.text = currentWord;
 
         if (currentWord.Length == 0)

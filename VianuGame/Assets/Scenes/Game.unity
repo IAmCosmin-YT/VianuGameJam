@@ -4647,11 +4647,11 @@ RectTransform:
   m_Father: {fileID: 1362179618}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 737, y: -463}
-  m_SizeDelta: {x: 298.77, y: 56.02}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -20, y: 22}
+  m_SizeDelta: {x: 298.77002, y: 56.01999}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &1380424643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6767,6 +6767,7 @@ GameObject:
   - component: {fileID: 1925263593}
   - component: {fileID: 1925263594}
   - component: {fileID: 1925263592}
+  - component: {fileID: 1925263595}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -6791,6 +6792,7 @@ MonoBehaviour:
   maxWords: 0
   imageSizeAdder: 0
   wordFile: {fileID: 4900000, guid: af1188682d2e743f7a8fe909512f1ffa, type: 3}
+  wordFilePhone: {fileID: 4900000, guid: ed39c0e7b5158c944aa77656cd1942e5, type: 3}
   imageFiller: {fileID: 733858944}
   winReq: {fileID: 1107044560}
   magician: {fileID: 1744035621}
@@ -6826,6 +6828,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnRate: 2
   enemyPrefab: {fileID: 7395891622293041516, guid: ae5dbd5b2667b403289b4a46f89395f3, type: 3}
+--- !u!114 &1925263595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925263590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcd658173effce44ca8e9926bed9ff2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1941604191
 GameObject:
   m_ObjectHideFlags: 0
@@ -7155,7 +7169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2098692455
 Transform:
   m_ObjectHideFlags: 0

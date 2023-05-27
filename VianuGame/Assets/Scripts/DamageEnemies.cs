@@ -5,6 +5,7 @@ public class DamageEnemies : MonoBehaviour
 {
     private List<Enemy> enemies = new List<Enemy>();
     [SerializeField] WordManager wordManager;
+    char endsWith;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,7 +19,10 @@ public class DamageEnemies : MonoBehaviour
         }
         if (collision.CompareTag("Letter"))
         {
-            wordManager.subtractLetter();
+            string lastLetter = collision.name.ToString().Remove(0, collision.name.ToString().Length - 1);
+            endsWith = lastLetter[0];
+            Debug.Log(endsWith);
+            wordManager.subtractSameLetters(endsWith);
             Destroy(collision.gameObject);
         }
     }
@@ -33,7 +37,7 @@ public class DamageEnemies : MonoBehaviour
                 enemies.Remove(enemy);
                 while (enemy.speed <= enemy.speedCopy)
                 {
-                    enemy.speed += Time.deltaTime*1.5f;
+                    enemy.speed += Time.deltaTime * 1.5f;
                 }
             }
         }

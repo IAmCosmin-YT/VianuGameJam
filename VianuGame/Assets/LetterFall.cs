@@ -11,45 +11,42 @@ public class LetterFall : MonoBehaviour
     {
         if (wordManager.currentWord.Length > 1)
         {
-            int groupSize = Random.Range(1, wordManager.currentWord.Length); // Randomly determine the size of the letter group
-            List<char> lettersInGroup = new List<char>();
+            string newWord = wordManager.currentWord;
+            int currWordLenght = wordManager.currentWord.Length;
 
-            for (int i = 0; i < groupSize; i++)
-            {
-                char letter = wordManager.currentWord[i];
-                lettersInGroup.Add(letter);
-            }
-
-            GameObject letterGroup = new GameObject();
-            letterGroup.name = "GroupedLetters_";
 
             // Determine the random position around the center object
-            float randomX = Random.Range(-6.5f, 6.5f); // Adjust the range as per your scene's requirements
-            float randomY = Random.Range(-2.5f, 2.5f); // Adjust the range as per your scene's requirements
+            float randomX = Random.Range(-7.5f, 7.5f); // Adjust the range as per your scene's requirements
+            float randomY = Random.Range(-3.5f, 3.5f); // Adjust the range as per your scene's requirements
             float c = 0;
+            char oldLetter = char.MaxValue;
 
-            foreach (char letter in lettersInGroup)
+
+            for (int i = 0; i < 2; i++)
             {
-                letterGroup.name += letter;
-                // Spawn the letters at the specified random position
-                GameObject letterObject = new GameObject("Letter" + "_" + letter);
-                SpriteRenderer spriteRenderer = letterObject.AddComponent<SpriteRenderer>();
-                PolygonCollider2D polygonCollider2D = letterObject.AddComponent<PolygonCollider2D>();
-                Rigidbody2D rigidbody2D = letterObject.AddComponent<Rigidbody2D>();
+                char letter = newWord[Random.Range(0, currWordLenght)];
+                if (letter != oldLetter)
+                {
+                    // Spawn the letters at the specified random position
+                    GameObject letterObject = new GameObject("Letter" + "_" + letter);
+                    SpriteRenderer spriteRenderer = letterObject.AddComponent<SpriteRenderer>();
+                    PolygonCollider2D polygonCollider2D = letterObject.AddComponent<PolygonCollider2D>();
+                    Rigidbody2D rigidbody2D = letterObject.AddComponent<Rigidbody2D>();
 
-                letterObject.transform.position = new Vector3(transform.position.x + randomX + c, transform.position.y + randomY, 0f);
-                letterObject.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + Random.Range(-20, 20));
-                letterObject.transform.localScale = new Vector3(.2f, .2f, .2f); // Adjust the scale as per your desired size
-                letterObject.tag = "Letter";
+                    letterObject.transform.position = new Vector3(transform.position.x + randomX + c, transform.position.y + randomY, 0f);
+                    letterObject.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + Random.Range(-20, 20));
+                    letterObject.transform.localScale = new Vector3(.2f, .2f, .2f); // Adjust the scale as per your desired size
+                    letterObject.tag = "Letter";
 
-                polygonCollider2D.isTrigger = true;
-                rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
-                rigidbody2D.constraints.Equals(true);
+                    polygonCollider2D.isTrigger = true;
+                    rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
+                    rigidbody2D.constraints.Equals(true);
 
-                spriteRenderer.sprite = GetSpriteForLetter(letter);
-                c += 0.5f; // Adjust the spacing between letters
-
-                letterObject.transform.parent = letterGroup.transform;
+                    spriteRenderer.sprite = GetSpriteForLetter(letter);
+                    c += 0.5f; // Adjust the spacing between letters
+                }
+                else i--;
+                oldLetter = letter;
             }
         }
         else
@@ -57,14 +54,9 @@ public class LetterFall : MonoBehaviour
             char letter = wordManager.currentWord[0];
 
             // Determine the random position around the center object
-            float randomX = Random.Range(-6.5f, 6.5f); // Adjust the range as per your scene's requirements
-            float randomY = Random.Range(-2.5f, 2.5f); // Adjust the range as per your scene's requirements
+            float randomX = Random.Range(-7.5f, 7.5f); // Adjust the range as per your scene's requirements
+            float randomY = Random.Range(-3.5f, 3.5f); // Adjust the range as per your scene's requirements
             float c = 0;
-
-            GameObject letterGroup = new GameObject();
-            letterGroup.name = "GroupedLetters_";
-
-            letterGroup.name += letter;
             // Spawn the letters at the specified random position
             GameObject letterObject = new GameObject("Letter" + "_" + letter);
             SpriteRenderer spriteRenderer = letterObject.AddComponent<SpriteRenderer>();
@@ -82,8 +74,6 @@ public class LetterFall : MonoBehaviour
 
             spriteRenderer.sprite = GetSpriteForLetter(letter);
             c += 0.5f; // Adjust the spacing between letters
-
-            letterObject.transform.parent = letterGroup.transform;
         }
     }
 
