@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlatformDetector : MonoBehaviour
 {
     public static RuntimePlatform platform { get; private set; }
+    [SerializeField] GameObject forPhone;
 
     private void Start()
     {
@@ -39,5 +40,10 @@ public class PlatformDetector : MonoBehaviour
                 Debug.Log("Running on an unknown platform");
                 break;
         }
+        if (platform == RuntimePlatform.Android || platform == RuntimePlatform.IPhonePlayer)
+        {
+            forPhone.SetActive(true);
+        }
+        else forPhone.SetActive(false);
     }
 }

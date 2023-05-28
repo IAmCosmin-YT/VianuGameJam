@@ -33,9 +33,9 @@ public class Settings : MonoBehaviour
 
     [SerializeField] bool audioBool = true;
     [SerializeField] bool video = false;
-    
+
     private void Start()
-    {       
+    {
         Music.value = PlayerPrefs.GetFloat("musicVol", 0);
         MusicVol = PlayerPrefs.GetFloat("musicVol", 0);
         Master.value = PlayerPrefs.GetFloat("masterVol", 0);
@@ -73,7 +73,7 @@ public class Settings : MonoBehaviour
     {
         if (!audioBool && video)
         {
-            setInactve(audioTab, true);        
+            setInactve(audioTab, true);
             setInactve(videoTab, false);
 
             video = false;
@@ -141,12 +141,12 @@ public class Settings : MonoBehaviour
             Time.timeScale = 0;
         }
         else Time.timeScale = 1;
-        
+
     }
     public void SettingsOpen()
     {
         gameObject.GetComponent<Animator>().SetBool("active", !gameObject.GetComponent<Animator>().GetBool("active"));
-        if(zana != null)
+        if (zana != null)
         {
             zana.enabled = !gameObject.GetComponent<Animator>().GetBool("active");
         }

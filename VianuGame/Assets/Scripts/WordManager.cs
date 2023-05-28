@@ -16,6 +16,7 @@ public class WordManager : MonoBehaviour
     [SerializeField] Magician magician;
     RuntimePlatform currentPlatform;
     [SerializeField] Text howMuchToCompletion;
+    [SerializeField] LetterFall letterFall;
 
     private string[] words;
     [HideInInspector] public string currentWord;
@@ -55,6 +56,7 @@ public class WordManager : MonoBehaviour
             currentWord = words[Random.Range(0, words.Length)].Trim();
             wordText.text = currentWord;
             isWordCompleted = false;
+            letterFall.getCharFromWord(currentWord);
         }
     }
 
